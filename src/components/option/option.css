@@ -1,0 +1,50 @@
+.option-wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option-wrapper button {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    box-shadow: none;
+}
+
+.option-wrapper button:focus {
+    box-shadow: none;
+}
+
+.button-primary {
+    background-color: #2196F3;
+    border: 1px solid #2196F3;
+    color: #FFFFFF;
+}
+
+.button-secondary {
+    background-color: #FFFFFF;
+    border: 1px solid #DFE5EC;
+    color: #4A4A4A;
+}
+
+@media (min-width: 768px) {
+    .option-wrapper {
+        margin-top: 0;
+        width: 100%;
+    }
+
+    .button-primary:hover {
+        background-color: #85BEEC;
+        border: 1px solid #85BEEC;
+        color: #FFFFFF;
+    }
+
+    .button-secondary:hover {
+        background-color: #85BEEC;
+        border: 1px solid #85BEEC;
+        color: #FFFFFF;
+    }
+}

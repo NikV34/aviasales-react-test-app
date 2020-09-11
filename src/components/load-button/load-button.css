@@ -1,0 +1,25 @@
+.load-button {
+    background-color: #FFFFFF;
+    border: 1px solid #DFE5EC;
+    color: #4A4A4A;
+    padding: 15px 30px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.load-button:focus {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+    .load-button:hover {
+        background-color: #85BEEC;
+        border: 1px solid #85BEEC;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        color: #FFFFFF;
+    }
+}

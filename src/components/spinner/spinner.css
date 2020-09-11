@@ -1,0 +1,9 @@
+.spinner-wrapper {
+    text-align: center;
+    width: 100%;
+}
+
+.spinner-img {
+    height: 36px;
+    width: 36px;
+}

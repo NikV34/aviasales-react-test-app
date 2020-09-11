@@ -1,0 +1,17 @@
+.site-logo-wrapper {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.padding-right-50 {
+    padding-right: 50px;
+}
+
+.mob-padding {
+    padding: 0 15px !important;
+}
