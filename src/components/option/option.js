@@ -11,8 +11,12 @@ export default class Option extends Component {
 
     return (
       <div className="btn-group option-wrapper" role="group">
-        <button type="button" className={cheapestButtonClass} onClick={()=>{this.props.onToggleOption(false)}}>САМЫЙ ДЕШЕВЫЙ </button>
-        <button type="button" className={fastestButtonClass} onClick={()=>{this.props.onToggleOption(true)}}>САМЫЙ БЫСТРЫЙ</button>
+        <button type="button"
+                className={cheapestButtonClass}
+                onClick={()=>{this.props.onToggleOption(false)}}>САМЫЙ ДЕШЕВЫЙ </button>
+        <button type="button"
+                className={fastestButtonClass}
+                onClick={()=>{this.props.onToggleOption(true)}}>САМЫЙ БЫСТРЫЙ</button>
       </div>
     );
   }
