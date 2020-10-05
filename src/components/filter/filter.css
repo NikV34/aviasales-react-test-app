@@ -1,10 +1,7 @@
 .filter-wrapper {
-    width: 232px;
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .filter-body {
@@ -43,7 +40,8 @@
 
 @media (min-width: 768px) {
     .filter-wrapper {
-        margin-left: auto;
+        width: 232px;
+        margin-left: 0;
         margin-right: 20px;
     }
 }

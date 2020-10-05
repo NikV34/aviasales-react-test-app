@@ -6,12 +6,20 @@
 }
 
 .ticket-body {
+    display: flex;
+    flex-direction: column;
     padding: 20px 20px 10px 20px;
 }
 
-.ticket__price-wrapper {
-    display: flex;
+.ticket__header-wrapper {
+    display: inline-flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
+}
+
+.ticket__price-wrapper {
+    flex-grow: 1;
 }
 
 .ticket__price-label {
@@ -19,20 +27,27 @@
     font-size: 24px;
     line-height: 24px;
     color: #2196F3;
-    max-width: 50%;
+    margin-bottom: 0;
 }
 
 .ticket__aviacompany-logo {
-    margin-bottom: 20px;
+    height: 36px;
 }
 
 .ticket__segment-wrapper {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.ticket__segment-body {
+    flex-grow: 1;
+    flex-basis: 33%;
 }
 
 .ticket__segment-label{
     font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: 10px;
+    line-height: 16px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: #A0B0B9;
@@ -41,8 +56,20 @@
 
 .ticket__segment-value {
     font-weight: 600;
-    font-size: 14px;
-    line-height: 21px;
+    font-size: 12px;
+    line-height: 18px;
     color: #4A4A4A;
     margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+    .ticket__segment-label{
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .ticket__segment-value {
+        font-size: 14px;
+        line-height: 21px;
+    }
 }

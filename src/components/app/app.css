@@ -1,17 +1,47 @@
+.content {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
 .site-logo-wrapper {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.nopadding {
-    padding: 0 !important;
-    margin: 0 !important;
+.tickets-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.padding-right-50 {
-    padding-right: 50px;
+.tickets-column-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    flex-grow: 1; 
 }
 
-.mob-padding {
-    padding: 0 15px !important;
+@media (min-width: 768px) {
+    .content {
+        width: 755px;
+    }
+    
+    .tickets-wrapper {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    .tickets-column-wrapper {
+        display: inline-flex;
+        flex-direction: column;
+        flex-grow: 1; 
+    }
+
+    .filter-wrapper {
+        margin-left: 0;
+        margin-right: 20px;
+    }
 }

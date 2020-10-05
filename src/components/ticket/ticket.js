@@ -5,10 +5,12 @@ import "./ticket.css";
 const Ticket = ({ticket}) => {
   const {price, carrier} = ticket;
 
+  //"9" to "09"
   const twoDigitsFormat = (value) => {
     return value > 9 ? value.toString() : '0' + value;
   }
-
+  
+  // number to 10:25 
   const timeFormat = (value) => {
     const date = new Date(value);
     let timeList = [
@@ -34,47 +36,47 @@ const Ticket = ({ticket}) => {
 
   const numberSeparator = (number) => {
     const numberText = number.toString();
-    let start = numberText.length%3;
+    let start = numberText.length % 3;
     let triad = start ? [numberText.slice(0, start)] : [];
-    for (let i=0; i < Math.floor(numberText.length/3); i++) {
-      triad.push(numberText.slice(start + i*3, start + i*3 + 3))
+    for (let i=0; i < Math.floor(numberText.length / 3); i++) {
+      triad.push(numberText.slice(start + i * 3, start + i * 3 + 3))
     }
     return triad.join(' ')
   }
 
-  const transformSegment = (segment) => {
-    return (<div className="row nopadding ticket__segment-wrapper" key={segment.origin + '-' + segment.destination}>
-      <div className="col-4 nopadding">
-        <p className="ticket__segment-label">{segment.origin + ' - ' + segment.destination}</p>
-        <p className="ticket__segment-value">{timeFormat(segment.date) + ' - ' + timeFormat(arrivalDate(segment.date, segment.duration))}</p>
+  const renderSegment = (label, value) => {
+    return (
+      <div className="ticket__segment-body">
+        <p className="ticket__segment-label">{label}</p>
+        <p className="ticket__segment-value">{value}</p>
       </div>
-      <div className="col-4 nopadding">
-        <p className="ticket__segment-label">В ПУТИ</p>
-        <p className="ticket__segment-value">{twoDigitsFormat(Math.floor(segment.duration/60)) + 'ч ' + twoDigitsFormat(segment.duration % 60) + 'м'}</p>
-      </div>
-      <div className="col-4 nopadding">
-        <p className="ticket__segment-label">{segment.stops.length
-          ? numbTitle(segment.stops.length, ['пересадка', 'пересадки','пересадок'])
-          : 'Без пересадок'}
-        </p>
-        <p className="ticket__segment-value">{segment.stops.join(', ')}</p>
-      </div>
-    </div>)
+    )
   }
 
-  let segmentList = [];
-  for (let segment in ticket.segments) {
-    segmentList.push(transformSegment(ticket.segments[segment]))
+  const transformSegment = ({ origin, destination, date, duration, stops }) => {
+    const stopsLabel= stops.length ? numbTitle(stops.length, ['пересадка', 'пересадки','пересадок']) : 'Без пересадок';
+
+    return (
+      <div className="ticket__segment-wrapper" key={ origin + '-' + destination }>
+        {[
+          renderSegment(`${origin} - ${destination}`, `${timeFormat(date)} - ${timeFormat(arrivalDate(date, duration))}`),
+          renderSegment("В ПУТИ", `${twoDigitsFormat(Math.floor(duration/60))}ч ${twoDigitsFormat(duration % 60)}м`),
+          renderSegment(stopsLabel, stops.join(', '))
+        ]}
+      </div>
+    )
   }
+
+  let segmentList = ticket.segments.map(segment => transformSegment(segment))
 
   return (
     <div className="card ticket-wrapper">
       <div className="card-body ticket-body">
-        <div className="row nopadding">
-          <div className="col-8 nopadding ticket__price-wrapper">
+        <div className="ticket__header-wrapper">
+          <div className="ticket__price-wrapper">
             <p className="ticket__price-label">{numberSeparator(price)} Р</p>
           </div>
-          <div className="col-4 nopadding">
+          <div className="ticket__aviacompany-wrapper">
             <img className="ticket__aviacompany-logo" src={`https://pics.avs.io/99/36/${carrier}.png`} alt="aviacompany-logo"/>
           </div>
         </div>

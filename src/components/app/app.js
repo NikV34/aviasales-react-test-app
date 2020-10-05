@@ -51,17 +51,18 @@ export default class App extends Component {
     let activeFilterList = checkboxes.filter(item => item.isActive).map(item => item.content);
 
     return (
-      <div className="row">
-        <div className="col-12 site-logo-wrapper">
+      <div className="content">
+        <div className="site-logo-wrapper">
           <img className="site-logo" src={logo} alt="logo"/>
         </div>
-        <div className="col-md-5 col-12 nopadding">
+        <div className="tickets-wrapper">        
           <Filter checkboxes={checkboxes} onChecked={this.onChecked} />
+          <div className="tickets-column-wrapper">
+            <Option fastestOption={fastestOption} onToggleOption={this.toggleOption}/>
+            <TicketList fastestOption={fastestOption} filter={activeFilterList}/>
+          </div>
         </div>
-        <div className="col-md-6 col-12 nopadding mob-padding">
-          <Option fastestOption={fastestOption} onToggleOption={this.toggleOption}/>
-          <TicketList fastestOption={fastestOption} filter={activeFilterList}/>
-        </div>
+
       </div>
     );
   };
