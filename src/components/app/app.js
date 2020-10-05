@@ -49,10 +49,8 @@ export default class App extends Component {
     this.setState(newState);
   };
 
-  onToggleOption = (status) => {
-    this.setState(() => {
-      return ({fastestOption: status})
-    });
+  toggleOption = (newStatus) => {
+    this.setState({ fastestOption: newStatus } );
   }
 
   render() {
@@ -69,7 +67,7 @@ export default class App extends Component {
           <Filter checkboxes={checkboxes} onChecked={this.onChecked} />
         </div>
         <div className="col-md-6 col-12 nopadding mob-padding">
-          <Option fastestOption={fastestOption} onToggleOption={this.onToggleOption}/>
+          <Option fastestOption={fastestOption} onToggleOption={this.toggleOption}/>
           <TicketList fastestOption={fastestOption} filter={activeFilterList}/>
         </div>
       </div>
