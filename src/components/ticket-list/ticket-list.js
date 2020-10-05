@@ -20,17 +20,27 @@ export default class TicketList extends Component {
   }
 
   componentDidMount() {
-  this.ticketApi
-    .getSearchId()
-    .then((res) => {
-      this.setState({
-        searchId: res.searchId,
-        error: false,
-        loading: false
-      });
-      this.updateTicketList();
-    })
-    .catch(this.onError);
+    this.ticketApi
+      .getSearchId()
+      .then((res) => {
+        this.setState({
+          searchId: res.searchId,
+          error: false,
+          loading: false
+        });
+        this.updateTicketList();
+      })
+      .catch(this.onError);
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.ticketList !== prevState.ticketList || this.props.fastestOption !== prevProps.fastestOption ) {
+      if (!this.props.fastestOption) {
+        this.setState({ ticketList: this.state.ticketList.sort((a, b) => a.price - b.price) });
+      } else {
+        this.setState({ ticketList: this.state.ticketList.sort((a, b) => a.segments[0].duration - b.segments[0].duration) });
+      }
+    }
   };
 
   onError = () => {
@@ -60,14 +70,8 @@ export default class TicketList extends Component {
   }
 
   render() {
-    const { fastestOption, filter } = this.props;
+    const { filter } = this.props;
     const { availableRequest, ticketList, error, loading } = this.state;
-
-    if (!fastestOption) {
-      ticketList.sort((a, b) => a.price - b.price);
-    } else {
-      ticketList.sort((a, b) => a.segments[0].duration - b.segments[0].duration);
-    }
 
     let filteredTicketList = ticketList;
 
