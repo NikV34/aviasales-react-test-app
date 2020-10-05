@@ -19,34 +19,26 @@ export default class App extends Component {
   };
 
   onChecked = (checkedKey) => {
-    let newState = { checkboxes: [] };
     const all = this.state.checkboxes.filter(item => item.key === 'all')[0];
+    let checkboxes = [];
 
     if (checkedKey === 'all') {
-      for (let i of this.state.checkboxes) {
-        let {key, content, isActive} = i;
-        isActive = !all.isActive;
-        newState.checkboxes.push({key, content, isActive});
-      }
+      const newStatus = !all.isActive;
+      checkboxes = this.state.checkboxes.map(item => {
+        item.isActive = newStatus;
+        return item;
+      })
     } else {
-      for (let i of this.state.checkboxes) {
-        let { key, content, isActive } = i;
-
-        switch (key) {
-          case checkedKey:
-            isActive = !isActive;
-            newState.checkboxes.push({key, content, isActive});
-            break;
-          case 'all':
-            all.isActive = false;
-            newState.checkboxes.push(all);
-            break;
-          default:
-            newState.checkboxes.push({key, content, isActive});
+      checkboxes = this.state.checkboxes.map( (item) => {
+        if (item.key === checkedKey) {
+          item.isActive = !item.isActive;
+        } else if (item.key === 'all') {
+          item.isActive = false;
         }
-      }
+        return item;
+      })
     }
-    this.setState(newState);
+    this.setState({ checkboxes });
   };
 
   toggleOption = (newStatus) => {
