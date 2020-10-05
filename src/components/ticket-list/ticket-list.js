@@ -87,13 +87,13 @@ export default class TicketList extends Component {
     const loadButton = availableRequest && filter.length !== 0 ? <LoadButton updateTicketList={this.updateTicketList}/> : null;
 
     return(
-      <React.Fragment>
+      <div className="ticket-list">
         {option}
         {content}
         {spinner}
         {errorMessage}
         {loadButton}
-      </React.Fragment>
+      </div>
     );
   }
 }
