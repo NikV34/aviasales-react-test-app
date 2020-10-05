@@ -25,20 +25,11 @@
 
 .filter__checkbox-wrapper {
     padding: 10px 20px;
-    position: relative;
+    cursor: pointer;
 }
 
 .filter__checkbox-wrapper:hover {
     background-color: #F1FCFF;
-}
-
-input.filter__checkbox {
-    transform: scale(1.53);
-    display: inline-block;
-    position: absolute;
-    left: 23px;
-    top: 13px;
-    opacity: 0;
 }
 
 .filter__checkbox-label {
@@ -46,9 +37,7 @@ input.filter__checkbox {
     font-size: 13px;
     line-height: 20px;
     color: #4A4A4A;
-    position: absolute;
-    left: 50px;
-    top: auto;
+    margin-left: 10px;
     margin-bottom: 0;
 }
 

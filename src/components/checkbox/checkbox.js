@@ -2,7 +2,7 @@ import React from "react";
 
 import './checkbox.css';
 
-const Checkbox = ({isActive}) => {
+const Checkbox = ({ isActive }) => {
   const color = isActive ? "#2196F3" : "#9ABBCE" 
   const check = isActive ? <path d="M8.28571 14L4 10.1612L5.20857 9.0787L8.28571 11.8273L14.7914 6L16 7.09021L8.28571 14Z" fill={color}/> : null
   
