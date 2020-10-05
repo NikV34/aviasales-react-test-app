@@ -42,53 +42,44 @@ export default class TicketList extends Component {
   };
 
   updateTicketList = () => {
-    this.setState({loading: true});
-    this.setState((state) => {
-      this.ticketApi.getTickets(state.searchId)
-        .then((data) => {
-          this.setState(()=>{
-            let newArray = [...state.ticketList];
-            newArray.push(...data.tickets.slice(0, 5));
-            return ({
-              availableRequest: !data.stop,
-              error: false,
-              loading: false,
-              ticketList: newArray
-            })
+    this.setState({ loading: true });
+    this.ticketApi.getTickets(this.state.searchId)
+      .then((data) => {
+        this.setState(()=>{
+          let newArray = [...this.state.ticketList];
+          newArray.push(...data.tickets.slice(0, 5));
+          return ({
+            availableRequest: !data.stop,
+            error: false,
+            loading: false,
+            ticketList: newArray
           })
         })
-        .catch(this.onError);
-    });
+      })
+      .catch(this.onError);
   }
 
   render() {
-    const {fastestOption, filter} = this.props;
-    const {availableRequest, ticketList, error, loading} = this.state;
+    const { fastestOption, filter } = this.props;
+    const { availableRequest, ticketList, error, loading } = this.state;
 
     if (!fastestOption) {
-      ticketList.sort((a, b) => {return a.price - b.price})
+      ticketList.sort((a, b) => a.price - b.price);
     } else {
-      ticketList.sort((a, b) => {
-        return a.segments[0].duration - b.segments[0].duration})
+      ticketList.sort((a, b) => a.segments[0].duration - b.segments[0].duration);
     }
 
-    let filteredTicketList = ticketList.filter((ticket) => {
-      if (filter.includes(null)) {
-        return true;
-      } else {
-        return filter.includes(ticket.segments[0].stops.length);
-      }
-    });
+    let filteredTicketList = ticketList;
 
-    const renderItems = filteredTicketList
-      .map((item) => {
-        return <Ticket ticket={item}/>
-      });
+    //применение фильтра, если не выбрано ВСЕ
+    if (!filter.includes(null)) {
+      filteredTicketList = ticketList.filter((ticket) => filter.includes(ticket.segments[0].stops.length));
+    }
 
     const errorMessage = error ? <Error msg={"Ошибка сервера, загрузите еще"}/> : null;
     const spinner = loading ? <Spinner /> : null;
     const option = filter.length === 0 ? <div>Выберите количество пересадок</div> : null;
-    const content = renderItems;
+    const content = filteredTicketList.map((item) => <Ticket ticket={item}/>);
     const loadButton = availableRequest && filter.length !== 0 ? <LoadButton updateTicketList={this.updateTicketList}/> : null;
 
     return(

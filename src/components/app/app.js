@@ -19,19 +19,19 @@ export default class App extends Component {
   };
 
   onChecked = (checkedKey) => {
-    let newState = {checkboxes: []};
+    let newState = { checkboxes: [] };
     const all = this.state.checkboxes.filter(item => item.key === 'all')[0];
+
     if (checkedKey === 'all') {
       for (let i of this.state.checkboxes) {
         let {key, content, isActive} = i;
         isActive = !all.isActive;
         newState.checkboxes.push({key, content, isActive});
       }
-      this.setState(newState);
-      return
     } else {
       for (let i of this.state.checkboxes) {
-        let {key, content, isActive} = i;
+        let { key, content, isActive } = i;
+
         switch (key) {
           case checkedKey:
             isActive = !isActive;
@@ -56,10 +56,9 @@ export default class App extends Component {
   }
 
   render() {
-    const {checkboxes, fastestOption} = this.state
-    // eslint-disable-next-line array-callback-return
-    let filter = checkboxes.map(({ content, isActive }) => {if (isActive) {return content} else {}})
-                           .filter(item => typeof item !== 'undefined');
+    const { checkboxes, fastestOption } = this.state
+    
+    let activeFilterList = checkboxes.filter(item => item.isActive).map(item => item.content);
 
     return (
       <div className="row">
@@ -71,7 +70,7 @@ export default class App extends Component {
         </div>
         <div className="col-md-6 col-12 nopadding mob-padding">
           <Option fastestOption={fastestOption} onToggleOption={this.onToggleOption}/>
-          <TicketList fastestOption={fastestOption} filter={filter}/>
+          <TicketList fastestOption={fastestOption} filter={activeFilterList}/>
         </div>
       </div>
     );

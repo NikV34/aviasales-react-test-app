@@ -30,7 +30,7 @@ export default class Filter extends Component {
       </div>
     );
   });
-
+  
   render() {
     const { checkboxes, onChecked } = this.props
     
